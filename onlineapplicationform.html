@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPES Application Form</title>
-    <link rel="stylesheet" href="onlineapplicationform.css"> <!-- Ensure correct path -->
+    <link rel="stylesheet" href="onlineapplicationform.css">
     <script>
         function validateForm() {
             // Validate passport photo file size (max 2MB)
@@ -41,14 +41,17 @@
                 return false;
             }
 
-            return true; // Ensure the form submits after validation
+            // If all validations pass, redirect to the employment program dashboard
+            window.location.href = "DoleDashboard.html"; // Replace with your dashboard URL
+
+            return true;  // Ensure the form submits (redirect happens after validation)
         }
     </script>
 </head>
 <body>
     <div class="container">
         <h1>SPES Application Form</h1>
-        <form id="spesForm" onsubmit="return validateForm()" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+        <form id="spesForm" onsubmit="return validateForm()">
             <fieldset>
                 <legend>Personal Information</legend>
                 <div class="input-group">
@@ -183,8 +186,4 @@
 
             <div class="form-buttons">
                 <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+               
