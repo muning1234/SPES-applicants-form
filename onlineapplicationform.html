@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPES Application Form</title>
+    <link rel="stylesheet" href="onlineapplicationform.css">
+    <script>
+        function validateForm() {
+            // Validate passport photo file size (max 2MB)
+            const passportPhoto = document.getElementById('passportPhoto');
+            const passportPhotoFile = passportPhoto.files[0];
+            if (passportPhotoFile && passportPhotoFile.size > 2 * 1024 * 1024) {
+                alert("Passport photo file size exceeds the 2MB limit.");
+                return false;
+            }
+
+            // Validate document file size (max 5MB)
+            const documents = document.getElementById('documents');
+            const documentFiles = documents.files;
+            for (let i = 0; i < documentFiles.length; i++) {
+                if (documentFiles[i].size > 5 * 1024 * 1024) {
+                    alert("One or more of your documents exceed the 5MB file size limit.");
+                    return false;
+                }
+            }
+
+            // Validate contact number (must be in the proper format)
+            const contact = document.getElementById('contact').value;
+            const contactPattern = /^[0-9]{10}$/; // 10-digit number
+            if (!contactPattern.test(contact)) {
+                alert("Please enter a valid 10-digit contact number.");
+                return false;
+            }
+
+            // Validate email address format
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // If all validations pass, redirect to the employment program dashboard
+            window.location.href = "DoleDashboard.html"; // Replace with your dashboard URL
+
+            return true;  // Ensure the form submits (redirect happens after validation)
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>SPES Application Form</h1>
+        <form id="spesForm" onsubmit="return validateForm()">
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="input-group">
+                    <label for="surname">SURNAME:</label>
+                    <input type="text" id="surname" name="surname" required>
+                </div>
+                <div class="input-group">
+                    <label for="firstName">FIRST NAME:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="input-group">
+                    <label for="middleName">MIDDLE NAME:</label>
+                    <input type="text" id="middleName" name="middleName">
+                </div>
+                <div class="input-group">
+                    <label for="gsisBeneficiary">GSIS BENEFICIARY/RELATIONSHIP:</label>
+                    <input type="text" id="gsisBeneficiary" name="gsisBeneficiary">
+                </div>
+                <div class="input-group">
+                    <label for="passportPhoto">UPLOAD PASSPORT SIZE PHOTO (3.5cm x 4.5cm):</label>
+                    <input type="file" id="passportPhoto" name="passportPhoto" accept="image/*" required>
+                </div>
+                <div class="input-group">
+                    <label for="dob">DATE OF BIRTH (MM/DD/YYYY):</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="input-group">
+                    <label for="placeOfBirth">PLACE OF BIRTH:</label>
+                    <input type="text" id="placeOfBirth" name="placeOfBirth" required>
+                </div>
+                <div class="input-group">
+                    <label for="citizenship">CITIZENSHIP:</label>
+                    <input type="text" id="citizenship" name="citizenship" required>
+                </div>
+                <div class="input-group">
+                    <label for="contact">CONTACT DETAILS/CELLPHONE NO.:</label>
+                    <input type="tel" id="contact" name="contact" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">EMAIL ADDRESS:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="socialMedia">SOCIAL MEDIA ACCOUNT:</label>
+                    <input type="text" id="socialMedia" name="socialMedia">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Current Status</legend>
+                <div class="input-group">
+                    <label>STATUS:</label>
+                    <input type="radio" name="status" value="Single" required> Single
+                    <input type="radio" name="status" value="Married"> Married
+                    <input type="radio" name="status" value="Widow"> Widow/er
+                    <input type="radio" name="status" value="Separated"> Separated
+                </div>
+                <div class="input-group">
+                    <label>SEX:</label>
+                    <input type="radio" name="sex" value="Male" required> Male
+                    <input type="radio" name="sex" value="Female"> Female
+                </div>
+                <div class="input-group">
+                    <label>STUDENT STATUS:</label>
+                    <input type="checkbox" name="studentStatus" value="Student"> Student
+                    <input type="checkbox" name="studentStatus" value="ALS Student"> ALS Student
+                    <input type="checkbox" name="studentStatus" value="Out-of-School Youth"> Out-of-School Youth (OSY)
+                </div>
+                <div class="input-group">
+                    <label>CURRENT STATUS OF PARENTS:</label>
+                    <select name="parentStatus" required>
+                        <option value="" disabled selected>Select Status</option>
+                        <option value="Living together">Living together</option>
+                        <option value="Solo Parent">Solo Parent</option>
+                        <option value="Separated">Separated</option>
+                        <option value="PWD">Person With Disability</option>
+                        <option value="Senior Citizen">Senior Citizen</option>
+                        <option value="Sugar Plantation Worker">Sugar Plantation Worker</option>
+                        <option value="Indigenous People">Indigenous People</option>
+                        <option value="Displaced Worker">Displaced Worker</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>PRESENT ADDRESS:</label>
+                    <textarea id="presentAddress" name="presentAddress" rows="2" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label>PERMANENT ADDRESS:</label>
+                    <textarea id="permanentAddress" name="permanentAddress" rows="2" required></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Family Information</legend>
+                <div class="input-group">
+                    <label for="fatherName">FATHER’S NAME / CONTACT NO.:</label>
+                    <input type="text" id="fatherName" name="fatherName" required>
+                </div>
+                <div class="input-group">
+                    <label for="motherName">MOTHER’S MAIDEN NAME / CONTACT NO.:</label>
+                    <input type="text" id="motherName" name="motherName" required>
+                </div>
+                <div class="input-group">
+                    <label for="fatherOccupation">FATHER’S OCCUPATION:</label>
+                    <input type="text" id="fatherOccupation" name="fatherOccupation">
+                </div>
+                <div class="input-group">
+                    <label for="motherOccupation">MOTHER’S OCCUPATION:</label>
+                    <input type="text" id="motherOccupation" name="motherOccupation">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Education</legend>
+                <div class="input-group">
+                    <label>EDUCATION:</label>
+                    <input type="text" id="educationDetails" name="educationDetails" placeholder="Specify your education level, school name, course, year/level, and dates attended" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Additional Requirements</legend>
+                <div class="input-group">
+                    <label for="specialSkills">SPECIAL SKILLS:</label>
+                    <textarea id="specialSkills" name="specialSkills" rows="3" placeholder="List your skills..." required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="documents">UPLOAD DOCUMENTARY REQUIREMENTS:</label>
+                    <input type="file" id="documents" name="documents" accept="application/pdf, image/*" required multiple>
+                </div>
+            </fieldset>
+
+            <div class="form-buttons">
+                <button type="submit">Submit</button>
+               
